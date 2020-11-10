@@ -19,6 +19,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 # Generate all msg and srv files.
 file(
@@ -29,7 +31,8 @@ file(
   GLOB srv_files
   RELATIVE ${PROJECT_SOURCE_DIR}
   srv/*.srv)
-rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files})
+rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
+                           DEPENDENCIES std_msgs geometry_msgs)
 
 # Export and install the package.
 ament_package()
