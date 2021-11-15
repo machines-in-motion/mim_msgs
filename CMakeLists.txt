@@ -32,7 +32,8 @@ file(
   RELATIVE ${PROJECT_SOURCE_DIR}
   srv/*.srv)
 rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
-                           DEPENDENCIES std_msgs geometry_msgs)
+                           DEPENDENCIES std_msgs geometry_msgs
+                           LIBRARY_NAME ${PROJECT_NAME})
 
 # Export and install the package.
 ament_package()
