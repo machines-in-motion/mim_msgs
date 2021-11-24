@@ -31,9 +31,21 @@ file(
   GLOB srv_files
   RELATIVE ${PROJECT_SOURCE_DIR}
   srv/*.srv)
+
+find_program(LSB_RELEASE_EXEC lsb_release)
+execute_process(COMMAND ${LSB_RELEASE_EXEC} -rs
+    OUTPUT_VARIABLE LSB_RELEASE_SHORT
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+if (LSB_RELEASE_SHORT STREQUAL "18.04")
+  rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
+                            DEPENDENCIES std_msgs geometry_msgs)
+else()
 rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
-                           DEPENDENCIES std_msgs geometry_msgs
-                           LIBRARY_NAME ${PROJECT_NAME})
+                            DEPENDENCIES std_msgs geometry_msgs
+                            LIBRARY_NAME ${PROJECT_NAME})
+endif()
 
 # Export and install the package.
 ament_package()
