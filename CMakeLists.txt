@@ -42,9 +42,9 @@ if (LSB_RELEASE_SHORT STREQUAL "18.04")
   rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
                             DEPENDENCIES std_msgs geometry_msgs)
 else()
-rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
-                            DEPENDENCIES std_msgs geometry_msgs
-                            LIBRARY_NAME ${PROJECT_NAME})
+  rosidl_generate_interfaces(${PROJECT_NAME}_msg_srv ${msg_files} ${srv_files}
+                              DEPENDENCIES std_msgs geometry_msgs
+                              LIBRARY_NAME ${PROJECT_NAME}_msg_srv)
 endif()
 
 # Export and install the package.
